@@ -69,10 +69,23 @@ class User implements UserInterface
      */
     private $roles;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\content", mappedBy="user")
+     */
+    private $list_content;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\comment", mappedBy="user")
+     */
+    private $list_comment;
+
 
     public function __construct()
     {
         $this->roles = ['ROLE_USER'];
+        $this->createdAt = new \DateTime();
+        $this->list_content = new ArrayCollection();
+        $this->list_comment = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -170,6 +183,68 @@ class User implements UserInterface
     public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    /**
+     * @return Collection|content[]
+     */
+    public function getListContent(): Collection
+    {
+        return $this->list_content;
+    }
+
+    public function addListContent(content $listContent): self
+    {
+        if (!$this->list_content->contains($listContent)) {
+            $this->list_content[] = $listContent;
+            $listContent->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeListContent(content $listContent): self
+    {
+        if ($this->list_content->contains($listContent)) {
+            $this->list_content->removeElement($listContent);
+            // set the owning side to null (unless already changed)
+            if ($listContent->getUser() === $this) {
+                $listContent->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|comment[]
+     */
+    public function getListComment(): Collection
+    {
+        return $this->list_comment;
+    }
+
+    public function addListComment(comment $listComment): self
+    {
+        if (!$this->list_comment->contains($listComment)) {
+            $this->list_comment[] = $listComment;
+            $listComment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeListComment(comment $listComment): self
+    {
+        if ($this->list_comment->contains($listComment)) {
+            $this->list_comment->removeElement($listComment);
+            // set the owning side to null (unless already changed)
+            if ($listComment->getUser() === $this) {
+                $listComment->setUser(null);
+            }
+        }
+
         return $this;
     }
 }
