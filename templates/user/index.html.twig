@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <div class="example-wrapper">
+        <h3>liste des user</h3>
+        {% for user in userList %}
+            <li>{{ user.firstName }} 
+                {{ user.lastName }} 
+                {{ user.email }} 
+                - 
+                {{ user.birthDate|date('d F Y') }}
+                {{ user.createdAt|date('d F Y') }}
+            </li>
+        {% endfor %}
+    </div>
+{% endblock %}

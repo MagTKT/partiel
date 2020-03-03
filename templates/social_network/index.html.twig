@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}liste editeur{% endblock %}
+
+{% block body %}
+
+
+<div class="example-wrapper">
+    <h3>Voici la liste des réseaux sociaux</h3>
+    {% for socials in socialNetwork %}
+        <li>{{ socials.name_network}}</li>
+        <li>{{ socials.link}}</li>
+    {% endfor %}
+</div>
+{% endblock %}

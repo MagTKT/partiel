@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}liste editeur{% endblock %}
+
+{% block body %}
+
+
+<div class="example-wrapper">
+    <h3>Voici la liste des commentaires</h3>
+    {% for comments in comment %}
+        <li>{{ comments.name}}</li>
+        <li>{{ comments.comment}}</li>
+    {% endfor %}
+</div>
+{% endblock %}
