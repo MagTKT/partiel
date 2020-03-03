@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}liste editeur{% endblock %}
+
+{% block body %}
+
+
+<div class="example-wrapper">
+    <h3>Voici la liste des contenus</h3>
+    {% for contents in content %}
+        <li>{{ contents.title}}</li>
+        <li>{{ contents.content}}</li>
+    {% endfor %}
+</div>
+{% endblock %}
